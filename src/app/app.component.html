@@ -1,0 +1,96 @@
+<section class="dashboard-section">
+  <div class="left-sidebar">
+    <img src="../assets/image/left-sidebar.png" alt="">
+  </div>
+  <div class="main-content">
+    <div class="content-header">
+      <div class="content-header-top">
+        <h1>Payment Requests</h1>
+        <div class="header-search-box">
+          <div class="header-search">
+            <form action="">
+              <span><i class="fa fa-search"></i></span>
+              <input #search type="search" placeholder="Search Payment Requests" (keyup)="searchQs(search.value)">
+            </form>
+          </div>
+          <button class="search-plus">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="content-header-bottom">
+        <ul>
+          <li>
+            <a class="nav-active" (click)="getdataByfilter('all')" id="all">All</a>
+          </li>
+          <li>
+            <a (click)="getdataByfilter('Outstanding')" id="Outstanding">Outstanding</a>
+          </li>
+
+          <li>
+            <a (click)="getdataByfilter('Paid')" id="Paid">Paid</a>
+          </li>
+          <li class="custom-dropdown">
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <button id="dropdownManual" class="dropdown-btn" ngbDropdownAnchor (focus)="myDrop.open()">More</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button ngbDropdownItem (click)="getdataByfilter('Archived')">Archived</button>
+                <hr class="m-0">
+                <button ngbDropdownItem (click)="getdataByfilter('Recived Payments')">Received
+                  Payments</button>
+                <button ngbDropdownItem (click)="getdataByfilter('Stripe Funding')">Stripe
+                  Funding</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sort-header">
+      <label for="">Status</label>
+      <ul>
+        <li>
+          <p>1,888 Proposals</p>
+        </li>
+        <li>
+          <button><i class="fa fa-filter"></i> Sort By</button>
+        </li>
+      </ul>
+    </div>
+    <div class="sorted-detail-section">
+      <div class="sorted-detail-box submitted-detail-box" *ngFor="let item of payArray">
+        <div class="sorted-detail-box-left">
+          <div class="sorted-detail-box-left-detail">
+            <h4>{{item.name}} • {{item.price | currency:"USD":"symbol"}}</h4>
+            <p>#{{item.id}} • {{item.date}} • Whole Home Speaker Install</p>
+          </div>
+          <p class="sorted-detail-date">Due on Feb 2, 2022</p>
+        </div>
+
+        <div class="sorted-detail-box-right">
+          <div ngbDropdown class="sorted-dropdown">
+            <button id="dropdownBasic2" ngbDropdownToggle>
+              {{item.category}}
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <button ngbDropdownItem (click)="ChangeSortOrder('Draft',item)"><span
+                  class="draft-dot"></span>Draft</button>
+              <button ngbDropdownItem (click)="ChangeSortOrder('Submitted',item)"><span
+                  class="submitted-dot"></span>Submitted</button>
+              <button ngbDropdownItem (click)="ChangeSortOrder('Paid',item)"><span class="paid-dot"></span>Paid</button>
+              <button ngbDropdownItem (click)="ChangeSortOrder('Viewed',item)"><span
+                  class="viewed-dot"></span>Viewed</button>
+              <button ngbDropdownItem (click)="ChangeSortOrder('Declined',item)"><span
+                  class="declined-dot"></span>Declined</button>
+            </div>
+          </div>
+          <button class="dot-btn"><i class="fa fa-ellipsis-v"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-sidebar">
+    <img src="../assets/image/right-sidebar.png" alt="">
+  </div>
+</section>
